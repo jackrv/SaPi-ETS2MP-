@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
-	"version": "0.1.1",
-	"name": "ETS2MP user info",
-	"description": "Отображение информации о пользователе ETS2MP",
+	"version": "0.1.2",
+	"name": "ETS2MP users & servers info",
+	"description": "Отображение информации о пользователе и серверах ETS2MP",
 	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 	"icons": {
 			"16":  "./icons/16x16.png",
@@ -30,11 +30,11 @@
     },
    "web_accessible_resources": ["/inject.js"],
    "browser_action": {
-			"default_title": "ETS2MP user info",
+			"default_title": "ETS2MP servers info",
 			"default_icon": {
 				"19": "./icons/19x19.png",
 				"38": "./icons/38x38.png"
 			},
-			"default_popup": "info.html"
+			"default_popup": "popup.html"
     }
 }
