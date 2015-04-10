@@ -1,0 +1,16 @@
+{
+   "content_scripts": [{
+		"js": ["script.js"],
+		"matches": ["http://steamcommunity.com/profiles/*",
+					"http://steamcommunity.com/id/*",
+					"https://steamcommunity.com/profiles/*",
+					"https://steamcommunity.com/id/*"
+				]
+	}],
+   "web_accessible_resources": ["/inject.js"],
+   "description": "Отображение информации о пользователе ETS2MP",
+   "manifest_version": 2,
+   "name": "ETS2MP user info",
+   "permissions": ["http://steamcommunity.com/*", "https://steamcommunity.com/*", "http://api.ets2mp.com/player*", "http://ets2mp.com/*"],
+   "version": "0.1.0"
+}
