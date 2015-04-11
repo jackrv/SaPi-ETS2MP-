@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"name": "ETS2MP users & servers info",
 	"description": "Отображение информации о пользователе и серверах ETS2MP",
 	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
@@ -11,6 +11,7 @@
 			"128": "./icons/128x128.png"
 	},
 	"permissions": [
+			"storage",
 			"http://steamcommunity.com/*",
 			"https://steamcommunity.com/*",
 			"http://api.ets2mp.com/*",
@@ -25,6 +26,7 @@
 			"https://steamcommunity.com/id/*"
 		]
 	}],
+	"options_page": "options.html",
 	"background" : {
 			"page": "background.html"
     },
