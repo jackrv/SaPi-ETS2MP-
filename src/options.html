@@ -2,15 +2,14 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
 	<title>Options - ETS2MP users & servers info</title>
 </head>
 <body>
-	<img src="./img/logo.jpg" /><hr />
+	<img src="./img/logo.jpg" width="650"/><hr />
 	<div class="servList">
 		<label style="display:inline-block; width:200px;">
 			<strong>Выводить онлайн:</strong>
-			<input id="needBadge" type="checkbox"><br>
+			<input id="enableBadge" type="checkbox"><br>
 		</label>
 		<label style="display:inline-block; width:200px;">
 			<strong>Отслеживаемый сервер: </strong>
@@ -19,13 +18,13 @@
 		</label>
 		<label style="display:inline-block; width:200px;">
 			<strong>Время обновления:</strong>
-			<input id="timeUpdate" type="range" min="1" max="60" step="1" value="32">
+			<input id="timeUpdate" type="range" min="0" max="60" step="5" value="32">
 			<output for="timeUpdate" id="timeOut">32c.</output>
 		</label>
-		<div id="status"></div><br><br>
-		<button id="save">Сохранить</button>
+
+		<button id="save" style="float: left">Сохранить</button><div id="status"></div>
 	</div>
-	<script type="text/javascript" src="main.js"></script>
-	<script type="text/javascript" src="options.js"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
+	<script type="text/javascript" src="/js/options.js"></script>
 </body>
 </html>

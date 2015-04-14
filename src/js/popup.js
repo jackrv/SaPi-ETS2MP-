@@ -1,19 +1,19 @@
 window.onload = function(){
 	
-	getServersInfo();
-	if (getPlayers(0) > 0){
+	jsonParse('http://api.ets2mp.com/servers/');
+	if (_JSON.error == 'false'){
 		var stat = '<h3>Статистика серверов:</h3>';
 		var ets2mp_div = document.createElement("div");
 		ets2mp_div.className = "servStat";
 		stat += '<ul>';
-		for(var index in json.response) {
-			if (json.response[index].online){
-				var	online = json.response[index].players + '/' + json.response[index].maxplayers;
+		for(var index in _JSON.response) {
+			if (_JSON.response[index].online){
+				var	online = _JSON.response[index].players + '/' + _JSON.response[index].maxplayers;
 			}
 			else {
 				var	online = 'Offline';
 			}
-			stat += '<li><strong>' + json.response[index].name + ':</strong> (' + online + ')</li>';
+			stat += '<li><strong>' + _JSON.response[index].name + ':</strong> (' + online + ')</li>';
 		}
 		stat += '</ul>';
 		ets2mp_div.innerHTML = stat;

@@ -1,1 +1,0 @@
-document.cookie = "steamid_jackrv=" + window.g_rgProfileData.steamid;
