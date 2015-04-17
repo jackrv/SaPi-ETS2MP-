@@ -5,22 +5,13 @@
  * Copyright © jackrv (aka Красный) [special for ets2mp.ru]
  * Creative Commons «Attribution-ShareAlike (CC BY-SA)
  *
- * Last Edit: 14/04/2015
+ * Last Edit: 17/04/2015
  */
 // ==================================================================================
 include(chrome.extension.getURL('/js/inject.js'));
 
-placeHolder = document.getElementsByClassName("profile_header");
-if (placeHolder[0] !== undefined) {
-	var ets2mp_div = document.createElement("div");
-	ets2mp_div.id = "containerSaPi";
-	ets2mp_div.innerHTML = '<img src="http://cdn.steamcommunity.com/public/images/login/throbber.gif" width="18">';
-	placeHolder[0].appendChild(ets2mp_div);
-}
-// ==================================================================================
 
-
-var JSON, _URL, _STEAMID, _ETS2MPID, _PERSONALNAME;
+var $tElement, JSON, _URL, _STEAMID, _ETS2MPID, _PERSONALNAME;
 
 /**
  * Include js-code to user-profile pages:
@@ -28,87 +19,17 @@ var JSON, _URL, _STEAMID, _ETS2MPID, _PERSONALNAME;
  * For execute user steamID
  */
 function include(url) {
-	var script = document.createElement('script');
-	script.setAttribute('type', 'text/javascript');
-	script.setAttribute('src', url);
-	document.head.appendChild(script);
+	var script = $('<script/>', {'src': url, 'type': 'text/javascript'});
+	$('head').append(script);
 }
 
 /**
- * Add info about Steam or ETS2MP
- * 
- */
-function addInfo() {
-	setTimeout(function() {
-		_URL = document.getElementById("urlSaPi").value;
-		if (_URL.split('/')[2] == "steamcommunity.com") {
-			_STEAMID = document.getElementById("steamidSaPi").value;
-			_PERSONALNAME = document.getElementById("personanameSaPi").value;
-			
-			getJSON(_STEAMID);
-			infoInSteam(_STEAMID);
-		}
-		else if (_URL == "ets2mp.com") {
-			_ETS2MPID = document.getElementsByClassName('active')[0].toString().split("&")[1].split("=")[1];
-			getJSON(_ETS2MPID);
-			infoInEts2MP(_ETS2MPID);
-		}
-	}, 500);
-}
-
-/**
- * Function add info about player on Steam page!
- * append DIV-container(class "SaPi") to "profile_header"
- */
-function infoInSteam(id) {
-	setTimeout(function() {
-		var steam_data = '<strong>STEAM ID:</strong> <a href="http://steamcommunity.com/profiles/' + id + '">' + id + '</a>';
-		if (JSON.error)
-			ets2mp_data = ' | ETS2MP: ' + JSON.descriptor;
-		else{
-			ets2mp_data = ' | <strong>ETS2MP ID:</strong> <a href="http://ets2mp.com/index.php?page=profile&id=' + JSON.response.id + '">' + JSON.response.id;
-			if (getBans(JSON.response.id))
-				ets2mp_data += " (Есть нарушения)";
-			ets2mp_data += '</a> | <a id="getMoreInfo" href="#getMoreInfo" onclick="getMoreInfo();return false">Get more info</a>';
-		}
-
-		document.getElementById('containerSaPi').innerHTML = steam_data + ets2mp_data;
-		document.getElementById('getMoreInfo').addEventListener('click', getMoreInfoSaPi);
-	}, 750);
-}
-
-/**
- * Function add info about player on ETS2MP page!
- * append DIV-container(class "SaPi") to "thead"
- */
-function infoInEts2MP(id) {
-	setTimeout(function() {
-		var steam_li = document.createElement("li");
-		steam_li.innerHTML = '<a href="http://steamcommunity.com/profiles/' + JSON.response.steamID64 + '">Steam profile</a>';
-		document.getElementsByClassName('navigation')[0].appendChild(steam_li);
-	}, 500);
-}
-
-/**
- * Function to append modal window with full info about player
- * Call while user click on #getMoreInfo button
- */
-function getMoreInfoSaPi()
-{
-	setTimeout(function() {
-		document.getElementById('pInfo_full').innerHTML =
-			'<table>' +
-			'<tr><td width="160"><strong>Ссылка на профиль: </strong></td><td>' + _URL + '</td>' +
-			'<tr><td><strong>Steam ID: </strong></td><td>' + _STEAMID + '</td>' +
-			'<tr><td><strong>Имя (Steam): </strong></td><td>' + _PERSONALNAME + '</td>' +
-			'<tr><td><strong>ETS2MP ID: </strong></td><td>' + JSON.response.id + '</td>' +
-			'<tr><td><strong>Имя (на форуме): </strong></td><td>' + JSON.response.name + '</td>' +
-			'<tr><td><strong>Дата регистрации: </strong></td><td>' + JSON.response.joinDate + '</td>' +
-			'<tr><td><strong>Группа (на форуме): </strong></td><td>' + JSON.response.groupName + '</td>' +
-			'<tr><td><strong>Группа (в игре): </strong></td><td>' + (JSON.response.permissions.isGameAdmin ? 'Admin' : 'Player') + '</td>' +
-			'</table>';
-	}, 750);
-}
+ * While all DOM loaded - run addInfo function
+ * for add info about ETS2MP-user
+*/
+$(document).ready(function() {
+	addInfo();
+});
 
 /**
  * Function load json-info about player
@@ -116,18 +37,12 @@ function getMoreInfoSaPi()
  * @param {number} id Steam ID
  * @return {json} Load json-data into global variable JSON
  */
-function getJSON(id){
-	var url = "//api.ets2mp.com/player/" + id;
-	var xhr = new XMLHttpRequest();
-	xhr.onload = function () {
-		var doc = xhr.responseText;
-		if (doc) {
-			JSON = JSON.parse(doc);
-			JSON.response.steamID64 = doc.split("{")[2].split(",")[3].split(":")[1];
-		}
-	};
-	xhr.open("GET", url, false);
-	xhr.send(null);
+function getUserInfo(id, callback){
+	var url = "http://api.ets2mp.com/player/" + id;
+	$.getJSON(url, function (data) {
+		callback.call(data);
+		JSON = data.response;
+	});
 }
 
 /**
@@ -141,29 +56,129 @@ function getJSON(id){
  * @return {boolean} Presence of bans
 */
 function getBans(id) {
-	var isBan = false;
-	var url = "//ets2mp.com/index.php?page=profile&id=" + id;
-	var xhr = new XMLHttpRequest();
-	xhr.onload = function () {
-		var doc = xhr.responseText;
-		if (doc) {
-			if (doc.indexOf("No punishments to display") >= 0)
-				isBan = false;
-			else
-				isBan = true;
+	var url = "http://ets2mp.com/index.php?page=profile&id=" + id;
+	$.get(url, function (data) {
+		if (data.indexOf("No punishments to display.") < 0) {
+			$('#SaPi_ETS2MP').append($('<a/>', {"id": 'getAllBans', "href": '#getAllBans', "onclick": "getAllBans();return false"}).text(' (' + chrome.i18n.getMessage('injHaveBans') + ')'));
+			$tElement = $(data).find("#bans").find('tr');
+			
+			$('#getAllBans').click(getAllBansSaPi);
 		}
-	};
-	xhr.open("GET", url, false);
-	xhr.send(null);
-	return isBan;
+	});
+	
 }
 
 /**
- * While all DOM loaded - run addInfo function
- * for add info about ETS2MP-user
-*/
-var state = window.document.readyState;
-if((state == 'interactive')||(state == 'complete'))
-	addInfo();
-else
-	window.addEventListener("DOMContentLoaded", addInfo,false);
+ * Function to append modal window with All player bans
+ * Call while user click on #getAllBans button
+ */
+function getAllBansSaPi() {
+	setTimeout(function() {
+		$('#bInfo_full').text('');
+		var table = $('<table/>', {"id": 'SaPi_Bans'});
+		$.each($tElement, function(row, value) {
+			var newRow = $('<tr/>');
+			if (row == 0){
+				$.each($(value).find('td'), function(cell, value) {
+					newRow.append($('<th/>').text(chrome.i18n.getMessage('injBanModal_' + $(value).text())));
+				});
+			}
+			else {
+				$.each($(value).find('td'), function(cell, value) {
+					newRow.append($('<td/>').text($(value).text()));
+				});
+			}
+			table.append(newRow);
+		});
+		$('#bInfo_full').append(table);
+	}, 500);
+}
+
+/**
+ * Function to append modal window with full info about player
+ * Call while user click on #getMoreInfo button
+ */
+function getMoreInfoSaPi()
+{
+	setTimeout(function() {
+		$('#pInfo_full').text('');
+		var rows =[
+			[chrome.i18n.getMessage('injInfModal_SteamLink'),	_URL],
+			[chrome.i18n.getMessage('injInfModal_SteamID'),		_STEAMID],
+			[chrome.i18n.getMessage('injInfModal_SteamName'),	_PERSONALNAME],
+			[chrome.i18n.getMessage('injInfModal_ETS2MPID'),	JSON.id],
+			[chrome.i18n.getMessage('injInfModal_ForumName'),	JSON.name],
+			[chrome.i18n.getMessage('injInfModal_JoinDate'),	JSON.joinDate],
+			[chrome.i18n.getMessage('injInfModal_ForumGroup'),	JSON.groupName],
+			[chrome.i18n.getMessage('injInfModal_GameGroup'),	JSON.permissions.isGameAdmin ? 'Admin' : 'Player']
+		];
+
+		(function table(){
+			var table = $('<table/>', {"id": 'SaPi_fInfo'});
+			$.each(rows, function (row, value) {
+				var newRow = $('<tr/>');
+				newRow.append($('<td/>').append($('<strong/>').text(value[0] + ': ')));
+				newRow.append($('<td/>').text(value[1]));
+				table.append(newRow);
+			})
+			$('#pInfo_full').append(table);
+		})();
+	}, 750);
+}
+
+/**
+ * Add info about Steam or ETS2MP
+ * 
+ */
+function addInfo() {
+	setTimeout(function() {
+		_URL = $("#urlSaPi").val();
+		if (_URL.split('/')[2] == "steamcommunity.com") {
+			_STEAMID = $("#steamidSaPi").val();
+			_PERSONALNAME = $("#personanameSaPi").val();
+			infoInSteam(_STEAMID);
+		}
+		else if (_URL == "ets2mp.com") {
+			_ETS2MPID = $('.active')[0].toString().split("&")[1].split("=")[1];
+			infoInEts2MP(_ETS2MPID);
+		}
+	}, 50);
+}
+
+/**
+ * Function add info about player on Steam page!
+ * append DIV-container(class "SaPi") to "profile_header"
+ */
+function infoInSteam(id) {
+	getUserInfo(id, function () {
+		$('#containerSaPi').text('')
+							.append($('<strong/>').text('STEAM ID: '))
+							.append($('<a/>', {"href": 'http://steamcommunity.com/profiles/' + id}).text(id))
+							.append(' | ')
+							.append(this.error ? this.descriptor :
+								$('<strong/>').text('ETS2MP ID: '))
+							.append(this.response.error ? '' :
+								$('<a/>', {"id": 'SaPi_ETS2MP', "href": 'http://ets2mp.com/index.php?page=profile&id=' + this.response.id})
+									.text(this.response.id))
+							.append(' | ')
+							.append($('<a/>', {"id": 'getMoreInfo', "href": '#getMoreInfo', "onclick": "getMoreInfo();return false"}).text(chrome.i18n.getMessage('injGetMoreInf')));
+		getBans(this.response.id);
+		$('#getMoreInfo').click(getMoreInfoSaPi);
+	})
+}
+
+/**
+ * Function add info about player on ETS2MP page!
+ * append DIV-container(class "SaPi") to "thead"
+ */
+function infoInEts2MP(id) {
+	$.ajax({
+	    url: "http://api.ets2mp.com/player/" + id,
+	    dataType : "text",
+	    success: function (data) {
+			steamID = data.split("{")[2].split(",")[3].split(":")[1];
+			$('.SaPiSteam').text('');
+			$('.SaPiSteam').append($('<a/>', {"href": 'http://steamcommunity.com/profiles/' + steamID, "text": 'Steam'}));
+		}
+	});
+}

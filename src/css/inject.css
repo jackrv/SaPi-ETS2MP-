@@ -2,3 +2,15 @@
 	position: absolute;
 	top: 201px;
 }
+#SaPi_Bans {
+	padding: 5px;
+}
+#SaPi_Bans th, #SaPi_Bans td {
+	padding: 0 10px;
+}
+#SaPi_fInfo {
+	padding: 5px;
+}
+#SaPi_fInfo td {
+	padding: 1px 10px;
+}

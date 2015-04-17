@@ -1,56 +1,50 @@
-var _JSON;
-var _enableTick = true;
-var _updateTime = 5;
-var _serverID	= 0;
+var _enableTick, _updateTime, _serverID;
 var timerTick  	= 0;
 
 function startTimer() {
-	window.setInterval(function() {
-		_enableTick = localStorage["setting:enableTick"] == 1 ? true : false;
+	(function timer(){
 		_updateTime = parseInt(localStorage["setting:updateTime"]);
-		_serverID	= parseInt(localStorage["setting:serverID"]);
 		if (timerTick >= _updateTime) {
+			_enableTick = localStorage["setting:enableTick"] == 1 ? true : false;
 			if (_enableTick) {
-				servInfo = getServerInfo(_serverID);
-				if (servInfo)
-					setBadge(servInfo.players);
+				_serverID	= parseInt(localStorage["setting:serverID"]);
+				getServerInfo(function() {
+					setBadge(this.response[_serverID].players);
+				});
 			}
-			else setBadge('');
+			else setBadge();
 			timerTick = 0;
 		} else timerTick++;
-	}, 1000);
+
+		clearTimeout(timer.id);
+    	timer.id = setTimeout(timer, 1000);
+	})();
 }
 
 function setBadge(label){
-	chrome.browserAction.setBadgeText({text: label.toString()});
-}
-
-function getServerInfo(id){
-	if (id == undefined) id = 0;
-	jsonParse('http://api.ets2mp.com/servers/');
-	if (_JSON.error == 'false')
-		return _JSON.response[id];
+	if (label == undefined)
+		chrome.browserAction.setBadgeText({text: ''});
 	else
-		return !_JSON.error;
+		chrome.browserAction.setBadgeText({text: label.toString()});
 }
 
-function getUserInfo(id){
-	if (id == undefined) return 'Don\'t call function without parameters';
-	jsonParse('http://api.ets2mp.com/player/' + id);
-	if (!_JSON.error)
-		return _JSON.response;
-	else
-		return false;
-}
-
-function jsonParse(url) {
-	var xhr = new XMLHttpRequest();
-	xhr.onload = function () {
-		var doc = xhr.responseText;
-		if (doc) {
-			_JSON = JSON.parse(doc);
+function getServerInfo(callback){
+	$.getJSON('http://api.ets2mp.com/servers/', function (data) {
+		if (data.error == 'false') {
+			callback.call(data);
+			return true;
 		}
-    };
-	xhr.open("GET", url, false);
-	xhr.send(null);
+		else {
+			return false;
+		}
+	});
+}
+
+function localizePage () {
+	$('[data-resource]').each(function() {
+		var el = $(this);
+		var resourceName = el.data('resource');
+		var resourceText = chrome.i18n.getMessage(resourceName);
+		el.text(resourceText);
+	});
 }

@@ -1,36 +1,41 @@
-document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click', save_options);
+// ======================== Нужно как-то убрать этот native js ===========================
 document.getElementById('timeUpdate').addEventListener('change', timeUpd);
+function timeUpd() {
+	$('#timeOut').val($('#timeUpdate').val() + chrome.i18n.getMessage("optSecShort"));
+}
+// =======================================================================================
+
+$(document).ready(function() {
+	restore_options();
+	localizePage();
+	$('#save').click(save_options);
+});
 
 function save_options() {
-	localStorage["setting:enableTick"] = document.getElementById('enableBadge').checked ? 1 : 0;
-	localStorage["setting:updateTime"] = document.getElementById('timeUpdate').value;
-	localStorage["setting:serverID"]   = document.getElementById('servers').value;
+	localStorage["setting:enableTick"] = $('#enableBadge').prop("checked") ? 1 : 0;
+	localStorage["setting:updateTime"] = $('#timeUpdate').val();
+	localStorage["setting:serverID"]   = $('#servers').val();
 	
-	document.getElementById('status').textContent = 'Cохранено!';
-	setTimeout(function() {document.getElementById('status').textContent = '';}, 750);
+	$('#status').text(chrome.i18n.getMessage("optSaveOK"));
+	setTimeout(function() {$('#status').text('')}, 750);
 
 	setTimeout(function() {window.close()}, 1000);
 }
 
 function restore_options() {
-	document.getElementById('enableBadge').checked = localStorage['setting:enableTick'] == 1 ? true : false;
-	document.getElementById('timeUpdate').value = localStorage['setting:updateTime'];
-	document.getElementById('timeOut').value = localStorage['setting:updateTime'] + 'с.';
-	document.getElementById('servers').innerHTML = '<option disabled checked>Loading...</option>';
-	jsonParse("http://api.ets2mp.com/servers/");
-	if (_JSON.error == 'false'){
+	$('#enableBadge').prop("checked", localStorage['setting:enableTick'] == 1 ? true : false);
+	$('#timeUpdate').val(localStorage['setting:updateTime']);
+	$('#timeOut').val(localStorage['setting:updateTime'] + chrome.i18n.getMessage("optSecShort"));
+
+	getServerInfo(function() {
 		var id = 0;
-		var servList = '';
-		for(var index in _JSON.response) {
-			servList += '<option value="' + id + '">' + _JSON.response[index].name + '</option>';
+		for(var index in this.response) {
+			var option = $('<option/>');
+			option.attr({ 'value': id}).text(this.response[index].name);
+			$('#servers').append(option);
 			id++;
 		}
-		document.getElementById('servers').innerHTML = servList;
-		document.getElementById('servers').value = localStorage['setting:serverID'];
-	}
+		$('#servers').val(localStorage['setting:serverID']);
+	});
 }
 
-function timeUpd(time) {
-	document.getElementById('timeOut').value = document.getElementById('timeUpdate').value + 'c.';
-}

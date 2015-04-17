@@ -1,0 +1,102 @@
+{
+  "appName": {
+    "message": "SaPI",
+    "description": "Main application name"
+  },
+  "appDesc": {
+    "message": "Добавляет множество информации о серверах и пользователях ETS2MP", 
+    "description":"Application description"
+  },
+  "appTitlePopup": {
+  	"message": "SaPi [ETS2MP]",
+  	"description": "Title for popup icon in browser"
+  },
+  "optSecShort": {
+  	"message": "cек.",
+  	"description": "Short literal of seconds"
+  },
+  "optSaveOK": {
+  	"message": "Cохранено!",
+  	"description": "Alert-line, for save-event in options-page"
+  },
+  "optLabelOnline": {
+  	"message": "Выводить онлайн:",
+  	"description": "Label for enable|disable timer"
+  },
+  "optLabelServer": {
+  	"message": "Отслеживаемый сервер: ",
+  	"description": "Label for select server"
+  },
+  "optLabelTime": {
+  	"message": "Время обновления:",
+  	"description": "Label for range of time update"
+  },
+  "optSaveButton": {
+  	"message": "Сохранить!",
+  	"description": "Name of button save"
+  },
+  "popupStatsOfServers": {
+  	"message": "Статистика серверов:",
+  	"description": "Title on popup page"
+  },
+  "injGetMoreInf": {
+    "message": "Больше информации",
+    "description": "Link Get More Info on Steam page"
+  },
+  "injHaveBans": {
+    "message": "Есть нарушения",
+    "description": "This text showin if player have some bans"
+  },
+  "injBanModal_Date": {
+    "message": "Выдан",
+    "description": "Row header on modal"
+  },
+  "injBanModal_Reason": {
+    "message": "Причина",
+    "description": "Row header on modal"
+  },
+  "injBanModal_Admin": {
+    "message": "Админ",
+    "description": "Row header on modal"
+  },
+  "injBanModal_Type": {
+    "message": "Тип",
+    "description": "Row header on modal"
+  },
+  "injBanModal_Expires": {
+    "message": "Истекает",
+    "description": "Row header on modal"
+  },
+  "injInfModal_SteamLink": {
+    "message": "Ссылка на профиль",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_SteamID": {
+    "message": "Steam ID",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_SteamName": {
+    "message": "Имя (Steam)",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_ETS2MPID": {
+    "message": "ETS2MP ID",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_ForumName": {
+    "message": "Имя (на форуме)",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_JoinDate": {
+    "message": "Дата регистрации",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_ForumGroup": {
+    "message": "Группа (на форуме)",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_GameGroup": {
+    "message": "Группа (в игре)",
+    "description": "Row header on full info modal"
+  }
+}

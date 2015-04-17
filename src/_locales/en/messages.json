@@ -1,0 +1,102 @@
+{
+  "appName": {
+    "message": "SaPI",
+    "description": "Main application name"
+  },
+  "appDesc": {
+    "message": "Add more info about ETS2MP users and servers", 
+    "description":"Application description"
+  },
+  "appTitlePopup": {
+  	"message": "SaPi [ETS2MP]",
+  	"description": "Title for popup icon in browser"
+  },
+  "optSecShort": {
+  	"message": "sec.",
+  	"description": "Short literal of seconds"
+  },
+  "optSaveOK": {
+  	"message": "Saved!",
+  	"description": "Alert-line, for save-event in options-page"
+  },
+  "optLabelOnline": {
+  	"message": "Show count of players:",
+  	"description": "Label for enable|disable timer"
+  },
+  "optLabelServer": {
+  	"message": "Server: ",
+  	"description": "Label for select server"
+  },
+  "optLabelTime": {
+  	"message": "Time for update:",
+  	"description": "Label for range of time update"
+  },
+  "optSaveButton": {
+  	"message": "Save",
+  	"description": "Name of button save"
+  },
+  "popupStatsOfServers": {
+  	"message": "Servers statistic:",
+  	"description": "Title on popup page"
+  },
+  "injGetMoreInf": {
+    "message": "Get more info",
+    "description": "Link Get More Info on Steam page"
+  },
+  "injHaveBans": {
+    "message": "Have bans",
+    "description": "This text showin if player have some bans"
+  },
+  "injBanModal_Date": {
+    "message": "Date",
+    "description": "Row header on modal"
+  },
+  "injBanModal_Reason": {
+    "message": "Reason",
+    "description": "Row header on modal"
+  },
+  "injBanModal_Admin": {
+    "message": "Admin",
+    "description": "Row header on modal"
+  },
+  "injBanModal_Type": {
+    "message": "Type",
+    "description": "Row header on modal"
+  },
+  "injBanModal_Expires": {
+    "message": "Expires",
+    "description": "Row header on modal"
+  },
+  "injInfModal_SteamLink": {
+    "message": "Steam link",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_SteamID": {
+    "message": "Steam ID",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_SteamName": {
+    "message": "Name of Steam",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_ETS2MPID": {
+    "message": "ETS2MP ID",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_ForumName": {
+    "message": "Name on forum",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_JoinDate": {
+    "message": "Join date",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_ForumGroup": {
+    "message": "Group on forum",
+    "description": "Row header on full info modal"
+  },
+  "injInfModal_GameGroup": {
+    "message": "Group on game",
+    "description": "Row header on full info modal"
+  }
+}

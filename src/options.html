@@ -8,22 +8,23 @@
 	<img src="./img/logo.jpg" width="650"/><hr />
 	<div class="servList">
 		<label style="display:inline-block; width:200px;">
-			<strong>Выводить онлайн:</strong>
+			<strong data-resource="optLabelOnline"></strong>
 			<input id="enableBadge" type="checkbox"><br>
 		</label>
 		<label style="display:inline-block; width:200px;">
-			<strong>Отслеживаемый сервер: </strong>
+			<strong data-resource="optLabelServer"></strong>
 			<select id="servers">
 			</select><br>
 		</label>
 		<label style="display:inline-block; width:200px;">
-			<strong>Время обновления:</strong>
-			<input id="timeUpdate" type="range" min="0" max="60" step="5" value="32">
-			<output for="timeUpdate" id="timeOut">32c.</output>
+			<strong data-resource="optLabelTime"></strong>
+			<input id="timeUpdate" type="range" min="0" max="60" step="5" value="32"">
+			<output for="timeUpdate" id="timeOut"></output>
 		</label>
 
-		<button id="save" style="float: left">Сохранить</button><div id="status"></div>
+		<button id="save" style="float: left" data-resource="optSaveButton"></button><div id="status"></div>
 	</div>
+	<script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="/js/main.js"></script>
 	<script type="text/javascript" src="/js/options.js"></script>
 </body>
