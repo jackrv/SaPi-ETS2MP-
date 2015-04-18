@@ -5,11 +5,6 @@ if(localStorage['setting:updateTime'] == undefined)
 if(localStorage['setting:enableTick'] == undefined)
 	localStorage['setting:enableTick'] = 1;
 
-_updateTime = parseInt(localStorage['setting:updateTime']);
-_serverID	= parseInt(localStorage['setting:serverID']);
-_enableTick	= localStorage['setting:enableTick'] == '1' ? true : false;
-
 $(document).ready(function () {
-	if (_enableTick)
-		startTimer();
+	startTimer();
 });

@@ -1,23 +1,13 @@
-var _enableTick, _updateTime, _serverID;
-var timerTick  	= 0;
-
 function startTimer() {
 	(function timer(){
-		_updateTime = parseInt(localStorage["setting:updateTime"]);
-		if (timerTick >= _updateTime) {
-			_enableTick = localStorage["setting:enableTick"] == 1 ? true : false;
-			if (_enableTick) {
-				_serverID	= parseInt(localStorage["setting:serverID"]);
-				getServerInfo(function() {
-					setBadge(this.response[_serverID].players);
-				});
-			}
-			else setBadge();
-			timerTick = 0;
-		} else timerTick++;
-
+		if (localStorage["setting:enableTick"] == 1) {
+			getServerInfo(function() {
+				setBadge(this.response[parseInt(localStorage["setting:serverID"])].players);
+			});
+		} else setBadge();
 		clearTimeout(timer.id);
-    	timer.id = setTimeout(timer, 1000);
+		var interval = parseInt(localStorage["setting:updateTime"]); 
+    	timer.id = setTimeout(timer, (interval == 0 ? 1 : interval) * 1000);
 	})();
 }
 
