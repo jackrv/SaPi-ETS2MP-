@@ -1,15 +1,25 @@
 $(document).ready(function() {
 	getServerInfo(function() {
-		var ets2mp_div = $('<div/>');
-		ets2mp_div.addClass("servStat");
-		ets2mp_div.append($('<h3/>').text(chrome.i18n.getMessage("popupStatsOfServers")));
-		var list = $('<ul/>');
+		$('.main').append($('<h3/>', {"class": 'ui header'})
+					.append($('<i/>', {"class": 'bar chart icon'}))
+					.append($('<div/>', {"class": 'content', "text": chrome.i18n.getMessage('popupStatsOfServers')})
+						.append($('<div/>', {"class": 'sub header', "text": chrome.i18n.getMessage('popupSubStatsOfServers')}))));
 		for(var index in this.response) {
-			var item = $('<li/>');
-			item.append($('<strong/>').text(this.response[index].name + ': '));
-			item.append(this.response[index].online ? this.response[index].players + '/' + this.response[index].maxplayers : 'Offline');
-			ets2mp_div.append(item);
+			var item = $('<div/>', {"class": 'ui segment'})
+							.append($('<div/>', {"class": 'ui top teal attached progress', "data-percent": parseInt(this.response[index].players * 100 / this.response[index].maxplayers)})
+								.append($('<div/>', {"class": 'bar'})))
+							.append($('<span/>').append($('<strong/>').text(this.response[index].name))
+								.append(": ({0} / {1})".f(this.response[index].players, this.response[index].maxplayers)))
+							.append($('<div/>', {"class": 'ui bottom teal attached progress', "data-percent": parseInt(this.response[index].players * 100 / this.response[index].maxplayers)})
+								.append($('<div/>', {"class": 'bar'})));
+
+
+			$('.main').append(item);
 		}
-		$('body').append(ets2mp_div);
+		$('.progress').progress();
 	});
+	localizePage();
+	$('a').click(function(e) {
+		chrome.tabs.create({url: $(e)[0].toElement.href});
+    });
 });

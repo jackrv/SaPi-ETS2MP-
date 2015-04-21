@@ -58,7 +58,7 @@ function getUserInfo(id, callback){
 function getBans(id) {
 	var url = "http://ets2mp.com/index.php?page=profile&id=" + id;
 	$.get(url, function (data) {
-		if (data.indexOf("No punishments to display.") < 0) {
+		if ($(data).find('.info').length == 0) {
 			$('#SaPi_ETS2MP').append($('<a/>', {"id": 'getAllBans', "href": '#getAllBans', "onclick": "getAllBans();return false"}).text(' (' + chrome.i18n.getMessage('injHaveBans') + ')'));
 			$tElement = $(data).find("#bans").find('tr');
 			
@@ -80,7 +80,7 @@ function getAllBansSaPi() {
 			var newRow = $('<tr/>');
 			if (row == 0){
 				$.each($(value).find('td'), function(cell, value) {
-					newRow.append($('<th/>').text(chrome.i18n.getMessage('injBanModal_' + $(value).text())));
+					newRow.append($('<th/>').text(chrome.i18n.getMessage('injBanModal_' + cell)));
 				});
 			}
 			else {

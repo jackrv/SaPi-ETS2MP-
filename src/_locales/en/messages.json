@@ -15,12 +15,8 @@
   	"message": "sec.",
   	"description": "Short literal of seconds"
   },
-  "optSaveOK": {
-  	"message": "Saved!",
-  	"description": "Alert-line, for save-event in options-page"
-  },
   "optLabelOnline": {
-  	"message": "Show count of players:",
+  	"message": "Show count of players",
   	"description": "Label for enable|disable timer"
   },
   "optLabelServer": {
@@ -35,9 +31,17 @@
   	"message": "Save",
   	"description": "Name of button save"
   },
+  "optNewVer": {
+    "message": "Check a new version of ETS2MP",
+    "description": "Label for enable|disable to check a new version"
+  },
   "popupStatsOfServers": {
-  	"message": "Servers statistic:",
+  	"message": "Servers statistic",
   	"description": "Title on popup page"
+  },
+  "popupSubStatsOfServers": {
+    "message": "Last info about servers",
+    "description": "Subheader on popup page"
   },
   "injGetMoreInf": {
     "message": "Get more info",
@@ -47,25 +51,25 @@
     "message": "Have bans",
     "description": "This text showin if player have some bans"
   },
-  "injBanModal_Date": {
+  "injBanModal_0": {
     "message": "Date",
-    "description": "Row header on modal"
+    "description": "Row header Date on bans on modal"
   },
-  "injBanModal_Reason": {
+  "injBanModal_1": {
     "message": "Reason",
-    "description": "Row header on modal"
+    "description": "Row header Reason on bans on modal"
   },
-  "injBanModal_Admin": {
+  "injBanModal_2": {
     "message": "Admin",
-    "description": "Row header on modal"
+    "description": "Row header Admin on bans on modal"
   },
-  "injBanModal_Type": {
+  "injBanModal_3": {
     "message": "Type",
-    "description": "Row header on modal"
+    "description": "Row header Type on bans on modal"
   },
-  "injBanModal_Expires": {
+  "injBanModal_4": {
     "message": "Expires",
-    "description": "Row header on modal"
+    "description": "Row header Expires on bans on modal"
   },
   "injInfModal_SteamLink": {
     "message": "Steam link",
@@ -98,5 +102,21 @@
   "injInfModal_GameGroup": {
     "message": "Group on game",
     "description": "Row header on full info modal"
+  },
+  "ntfk_NewVersionTitle": {
+    "message": "New Version!",
+    "description": "Title for notification of new version"
+  },
+  "ntfk_NewVersionContent": {
+    "message": "Version {0} avalible!\nClick for download!",
+    "description": "Main content in notifocation of new version. {0} - version"
+  },
+  "ntfk_DwnldVersionTitle": {
+    "message": "The download is started!",
+    "description": "Title for notification of download new version"
+  },
+  "ntfk_DwnldVersionContent": {
+    "message": "Starting the download the new version: {0}\nSearch his in your download folder!",
+    "description": "Main content in notifocation of download new version. {0} - version"
   }
 }

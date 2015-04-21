@@ -12,19 +12,15 @@
   	"description": "Title for popup icon in browser"
   },
   "optSecShort": {
-  	"message": "cек.",
+  	"message": "сек.",
   	"description": "Short literal of seconds"
   },
-  "optSaveOK": {
-  	"message": "Cохранено!",
-  	"description": "Alert-line, for save-event in options-page"
-  },
   "optLabelOnline": {
-  	"message": "Выводить онлайн:",
+  	"message": "Отображать количество онлайн игроков",
   	"description": "Label for enable|disable timer"
   },
   "optLabelServer": {
-  	"message": "Отслеживаемый сервер: ",
+  	"message": "На следующем сервере: ",
   	"description": "Label for select server"
   },
   "optLabelTime": {
@@ -35,9 +31,17 @@
   	"message": "Сохранить!",
   	"description": "Name of button save"
   },
+  "optNewVer": {
+    "message": "Проверять обновления игры",
+    "description": "Label for enable|disable to check a new version"
+  },
   "popupStatsOfServers": {
-  	"message": "Статистика серверов:",
+  	"message": "Статистика серверов",
   	"description": "Title on popup page"
+  },
+  "popupSubStatsOfServers": {
+    "message": "Последние сведения",
+    "description": "Subheader on popup page"
   },
   "injGetMoreInf": {
     "message": "Больше информации",
@@ -47,25 +51,25 @@
     "message": "Есть нарушения",
     "description": "This text showin if player have some bans"
   },
-  "injBanModal_Date": {
+  "injBanModal_0": {
     "message": "Выдан",
-    "description": "Row header on modal"
+    "description": "Row header Date on bans modal"
   },
-  "injBanModal_Reason": {
+  "injBanModal_1": {
     "message": "Причина",
-    "description": "Row header on modal"
+    "description": "Row header Reason on bans on modal"
   },
-  "injBanModal_Admin": {
+  "injBanModal_2": {
     "message": "Админ",
-    "description": "Row header on modal"
+    "description": "Row header Admin on bans on modal"
   },
-  "injBanModal_Type": {
+  "injBanModal_3": {
     "message": "Тип",
-    "description": "Row header on modal"
+    "description": "Row header Type on bans on modal"
   },
-  "injBanModal_Expires": {
+  "injBanModal_4": {
     "message": "Истекает",
-    "description": "Row header on modal"
+    "description": "Row header Expires on bans on modal"
   },
   "injInfModal_SteamLink": {
     "message": "Ссылка на профиль",
@@ -98,5 +102,21 @@
   "injInfModal_GameGroup": {
     "message": "Группа (в игре)",
     "description": "Row header on full info modal"
+  },
+  "ntfk_NewVersionTitle": {
+    "message": "Новая версия!",
+    "description": "Title for notification of new version"
+  },
+  "ntfk_NewVersionContent": {
+    "message": "Версия {0} уже доступна!\nНажмите для скачивания!",
+    "description": "Main content in notifocation of new version. {0} - version"
+  },
+  "ntfk_DwnldVersionTitle": {
+    "message": "Загрузка началась!",
+    "description": "Title for notification of download new version"
+  },
+  "ntfk_DwnldVersionContent": {
+    "message": "Загрузка версии: {0} началась\nИщи те скачанный файл в папке загрузок!",
+    "description": "Main content in notifocation of download new version. {0} - version"
   }
 }

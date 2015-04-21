@@ -1,0 +1,9 @@
+html {
+	height: auto;
+}
+
+#options {
+	padding: 5px 35px 15px;
+	margin: 0 auto;
+	width: 600px;
+}
