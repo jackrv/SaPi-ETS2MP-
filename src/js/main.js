@@ -2,7 +2,10 @@ function startTimer() {
 	(function timer(){
 		if (localStorage["setting:enableTick"] == 1) {
 			getServerInfo(function() {
-				setBadge(this.response[parseInt(localStorage["setting:serverID"])].players);
+				if (this.response[parseInt(localStorage["setting:serverID"])].online)
+					setBadge(this.response[parseInt(localStorage["setting:serverID"])].players);
+				else
+					setBadge('Offline');
 			});
 		} else setBadge();
 		if (localStorage["setting:chckNewVersion"])

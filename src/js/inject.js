@@ -1,17 +1,16 @@
 if (window.g_rgProfileData !== undefined) {
-	$ = window.$J;
-	var placeHolder = $(".profile_header");
+	var placeHolder = $J(".profile_header");
 	if (placeHolder !== undefined) {
-		var ets2mp_div = $('<div/>', {"id": 'containerSaPi'}).append($('<img/>', {"src": 'http://cdn.steamcommunity.com/public/images/login/throbber.gif', "width": '18'}));
+		var ets2mp_div = $J('<div/>', {"id": 'containerSaPi'}).append($J('<img/>', {"src": 'http://cdn.steamcommunity.com/public/images/login/throbber.gif', "width": '18'}));
 		placeHolder.append(ets2mp_div);
 	}
 
-	var divSaPi = $('<div/>', {"id": 'divSaPi'});
-	divSaPi.append($('<input/>', {"type": 'hidden', "name": 'urlSaPi', "id": 'urlSaPi', "value": window.g_rgProfileData.url}));
-	divSaPi.append($('<input/>', {"type": 'hidden', "name": 'steamidSaPi', "id": 'steamidSaPi', "value": window.g_rgProfileData.steamid}));
-	divSaPi.append($('<input/>', {"type": 'hidden', "name": 'summarySaPi', "id": 'summarySaPi', "value": window.g_rgProfileData.summary}));
-	divSaPi.append($('<input/>', {"type": 'hidden', "name": 'personanameSaPi', "id": 'personanameSaPi', "value": window.g_rgProfileData.personaname}));
-	$('body').append(divSaPi);
+	var divSaPi = $J('<div/>', {"id": 'divSaPi'});
+	divSaPi.append($J('<input/>', {"type": 'hidden', "name": 'urlSaPi', "id": 'urlSaPi', "value": window.g_rgProfileData.url}));
+	divSaPi.append($J('<input/>', {"type": 'hidden', "name": 'steamidSaPi', "id": 'steamidSaPi', "value": window.g_rgProfileData.steamid}));
+	divSaPi.append($J('<input/>', {"type": 'hidden', "name": 'summarySaPi', "id": 'summarySaPi', "value": window.g_rgProfileData.summary}));
+	divSaPi.append($J('<input/>', {"type": 'hidden', "name": 'personanameSaPi', "id": 'personanameSaPi', "value": window.g_rgProfileData.personaname}));
+	$J('body').append(divSaPi);
 
 	window.getMoreInfo = function() {
 		var Modal = window.ShowDialog('Extended Info', '<div id="pInfo_full"><img src="http://cdn.steamcommunity.com/public/images/login/throbber.gif"></div>');

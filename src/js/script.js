@@ -139,10 +139,16 @@ function addInfo() {
 			infoInSteam(_STEAMID);
 		}
 		else if (_URL == "ets2mp.com") {
-			_ETS2MPID = $('.active')[0].toString().split("&")[1].split("=")[1];
+			_ETS2MPID = getURLParam('id');
 			infoInEts2MP(_ETS2MPID);
 		}
 	}, 50);
+}
+
+function getURLParam(key) {
+    var s = window.location.search;
+    s = s.match(new RegExp(key + '=([^&=]+)'));
+    return s ? s[1] : false;
 }
 
 /**

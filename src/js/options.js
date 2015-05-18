@@ -43,6 +43,8 @@ function restore_options() {
 			if (localStorage['setting:serverID'] == id)
 				$('.text').text(this.response[index].name);
 			var option = $('<option/>', { 'value': id}).text(this.response[index].name);
+			if (!this.response[index].online)
+				option.text(this.response[index].name + " (Offline").prop('disabled', true);
 			$('#servers').append(option);
 			id++;
 		}
