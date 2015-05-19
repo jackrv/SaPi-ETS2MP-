@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"name": "__MSG_appName__",
 	"description": "__MSG_appDesc__",
 	"default_locale": "en",
@@ -22,14 +22,11 @@
 	],
 	"content_scripts": [{
 		"matches": [
-				"http://steamcommunity.com/profiles/*",
-				"https://steamcommunity.com/profiles/*",
-				"http://steamcommunity.com/id/*",
-				"https://steamcommunity.com/id/*",
-				"http://steamcommunity.com//profiles/*",
-				"https://steamcommunity.com//profiles/*",
-				"http://steamcommunity.com//id/*",
-				"https://steamcommunity.com//id/*",
+				"*://steamcommunity.com/profiles/*",
+				"*://steamcommunity.com/id/*",
+				"*://steamcommunity.com//profiles/*",
+				"*://steamcommunity.com//id/*",
+				"*://steamcommunity.com//id/*",
 				"http://ets2mp.com/index.php?page=profile&id=*"
 		],
 		"js": [

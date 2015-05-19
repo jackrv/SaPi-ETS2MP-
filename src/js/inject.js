@@ -1,3 +1,4 @@
+//alert(window.location.indexOf("steamcommunity.com") != -1);
 if (window.g_rgProfileData !== undefined) {
 	var placeHolder = $J(".profile_header");
 	if (placeHolder !== undefined) {
@@ -21,9 +22,16 @@ if (window.g_rgProfileData !== undefined) {
 		window.setTimeout(function(){Modal.AdjustSizing();},1);
 	};
 }
-else {
+else if(getURLParam("page") == "profile") {
 	$('.navigation').append($('<li/>', {"class": 'SaPiSteam'}).append($('<a/>').append($('<img/>', {"src": 'http://cdn.steamcommunity.com/public/images/login/throbber.gif', "width": '20'}))));
 	var divSaPi = $('<div/>', {"id": 'divSaPi'});
-	divSaPi.append($('<input/>', {"type": 'hidden', "name": 'urlSaPi', "id": 'urlSaPi', "value": "ets2mp.com"}));
+	divSaPi.append($('<input/>', {"type": 'hidden', "name": 'urlSaPi', "id": 'urlSaPi', "value": window.location}));
+	divSaPi.append($('<input/>', {"type": 'hidden', "name": 'idSaPi', "id": 'idSaPi', "value": getURLParam("id")}));
 	$('body').append(divSaPi);
+}
+
+function getURLParam(key) {
+    var s = window.location.search;
+    s = s.match(new RegExp(key + '=([^&=]+)'));
+    return s ? s[1] : false;
 }

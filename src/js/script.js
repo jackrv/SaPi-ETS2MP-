@@ -28,7 +28,10 @@ function include(url) {
  * for add info about ETS2MP-user
 */
 $(document).ready(function() {
-	addInfo();
+	setTimeout(function() {
+		if ($("#urlSaPi").val() !== undefined)
+			addInfo();
+	}, 500);
 });
 
 /**
@@ -131,24 +134,16 @@ function getMoreInfoSaPi()
  * 
  */
 function addInfo() {
-	setTimeout(function() {
-		_URL = $("#urlSaPi").val();
-		if (_URL.split('/')[2] == "steamcommunity.com") {
-			_STEAMID = $("#steamidSaPi").val();
-			_PERSONALNAME = $("#personanameSaPi").val();
-			infoInSteam(_STEAMID);
-		}
-		else if (_URL == "ets2mp.com") {
-			_ETS2MPID = getURLParam('id');
-			infoInEts2MP(_ETS2MPID);
-		}
-	}, 50);
-}
-
-function getURLParam(key) {
-    var s = window.location.search;
-    s = s.match(new RegExp(key + '=([^&=]+)'));
-    return s ? s[1] : false;
+	_URL = $("#urlSaPi").val();
+	if (_URL.indexOf('steamcommunity.com') != -1) {
+		_STEAMID = $("#steamidSaPi").val();
+		_PERSONALNAME = $("#personanameSaPi").val();
+		infoInSteam(_STEAMID);
+	}
+	else if (_URL.indexOf("ets2mp.com") != -1) {
+		_ETS2MPID = $("#idSaPi").val();
+		infoInEts2MP(_ETS2MPID);
+	}
 }
 
 /**
@@ -163,7 +158,7 @@ function infoInSteam(id) {
 							.append(' | ')
 							.append(this.error ? this.descriptor :
 								$('<strong/>').text('ETS2MP ID: '))
-							.append(this.response.error ? '' :
+							.append(this.error ? '' :
 								$('<a/>', {"id": 'SaPi_ETS2MP', "href": 'http://ets2mp.com/index.php?page=profile&id=' + this.response.id})
 									.text(this.response.id))
 							.append(' | ')
