@@ -8,7 +8,7 @@ function startTimer() {
 					setBadge('Offline');
 			});
 		} else setBadge();
-		if (localStorage["setting:chckNewVersion"])
+		if (localStorage["setting:chckNewVersion"] == 1)
 			getVersion();
 		clearTimeout(timer.id);
 		var interval = parseInt(localStorage["setting:updateTime"]); 
